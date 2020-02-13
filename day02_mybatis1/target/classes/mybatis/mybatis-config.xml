@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--<configuration>-->
+    <!--&lt;!&ndash; 环境：说明可以配置多个，default:指定生效的环境 &ndash;&gt;-->
+    <!--<environments default="development">-->
+        <!--&lt;!&ndash; id:环境的唯一标识 &ndash;&gt;-->
+        <!--<environment id="development">-->
+            <!--&lt;!&ndash; 事务管理器，type：类型 &ndash;&gt;-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--&lt;!&ndash; 数据源：type-池类型的数据源 &ndash;&gt;-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="root"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
+    <!--&lt;!&ndash; 映射文件 &ndash;&gt;-->
+    <!--<mappers>-->
+
+    <!--</mappers>-->
+<!--</configuration>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<configuration>
+    <properties resource="db.properties"></properties>
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClass}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/leyou/mappers/UserMapper.xml"></mapper>
+    </mappers>
+</configuration>

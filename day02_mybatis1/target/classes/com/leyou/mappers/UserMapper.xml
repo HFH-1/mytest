@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leyou.mappers.UserMapper">
+    <resultMap id="userMap" type="com.leyou.pojo.User1" autoMapping="true">
+        <id column="id" property="userId" javaType="int" jdbcType="INTEGER"></id>
+        <result column="username" property="userName" jdbcType="VARCHAR" javaType="string"></result>
+        <result column="birthday" property="userBirthday" javaType="date" ></result>
+        <result column="sex" property="userSex" jdbcType="CHAR" javaType="string"></result>
+        <result column="address" property="userAddress" jdbcType="VARCHAR" javaType="string"></result>
+    </resultMap>
+    <select id="findById" resultType="com.leyou.pojo.User" parameterType="int">
+        select * from  user where id =#{id}
+    </select>
+
+    <insert id="saveUser" parameterType="com.leyou.pojo.User">
+        <selectKey resultType="int" keyColumn="id" keyProperty="id">
+            select last_insert_id();
+        </selectKey>
+        insert into user(username,birthday,sex,address )values
+        (
+        #{username},
+        #{birthday},
+        #{sex},
+        #{address}
+        )
+    </insert>
+
+    <update id="updateUser" parameterType="com.leyou.pojo.User">
+        update user set
+        username=#{username},
+        birthday=#{birthday},
+        sex=#{sex},
+        address=#{address}
+        where
+        id=#{id}
+
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+
+
+    <select id="findByName" parameterType="string" resultType="com.leyou.pojo.User">
+        select * from user where username like concat('%',#{username},'%')
+    </select>
+
+    <select id="queryByVo" parameterType="com.leyou.vo.QueryVo" resultType="com.leyou.pojo.User">
+        select * from user where username like concat('%',#{user.username},'%')
+    </select>
+    <select id="findTotal" resultType="_int">
+        select count(*) from user;
+    </select>
+    <select id="findAll" resultMap="userMap">
+        select * from  user;
+    </select>
+</mapper>
